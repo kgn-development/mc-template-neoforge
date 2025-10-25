@@ -2,6 +2,7 @@ package li.kallisto.kgntemplatemod
 
 import li.kallisto.kgntemplatemod.block.ModBlocks
 import li.kallisto.kgntemplatemod.datagen.ModDataGenerator
+import li.kallisto.kgntemplatemod.item.ModCreativeModeTabs
 import li.kallisto.kgntemplatemod.item.ModItems
 import net.minecraft.resources.ResourceLocation
 import net.neoforged.fml.common.Mod
@@ -20,12 +21,13 @@ object KGNTemplateMod {
     init {
         LOGGER.log(Level.INFO, "initializing ${ID}")
 
-        ModBlocks.BLOCKS.register(MOD_BUS)
-        ModItems.ITEMS.register(MOD_BUS)
+        ModBlocks.register(MOD_BUS)
+        ModItems.register(MOD_BUS)
+        ModCreativeModeTabs.register(MOD_BUS)
 
         MOD_BUS.addListener(ModDataGenerator::onGatherClientData)
 
-        val obj = runForDist(clientTarget = {
+        runForDist(clientTarget = {
 
         }, serverTarget = {
 

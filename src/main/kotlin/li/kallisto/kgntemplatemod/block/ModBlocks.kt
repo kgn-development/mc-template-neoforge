@@ -8,6 +8,7 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
+import net.neoforged.bus.api.IEventBus
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.function.Supplier
@@ -28,5 +29,9 @@ object ModBlocks {
         val block = BLOCKS.register(name, blockSupplier)
         ModItems.ITEMS.register(name) { _ -> BlockItem(block.get(), itemProperties) }
         return block;
+    }
+
+    fun register(eventBus: IEventBus) {
+        BLOCKS.register(eventBus)
     }
 }

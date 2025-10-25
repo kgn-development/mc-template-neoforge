@@ -1,6 +1,10 @@
 package li.kallisto.kgntemplatemod.datagen
 
+import li.kallisto.kgntemplatemod.datagen.providers.ModBlockLootTableSubProvider
 import li.kallisto.kgntemplatemod.datagen.providers.ModModelProvider
+import net.minecraft.data.loot.LootTableProvider
+import net.minecraft.data.loot.LootTableProvider.SubProviderEntry
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.neoforged.neoforge.data.event.GatherDataEvent
 
 object ModDataGenerator {
@@ -10,5 +14,18 @@ object ModDataGenerator {
         val lookupProvider = event.lookupProvider
 
         generator.addProvider(true, ModModelProvider(packOutput))
+        generator.addProvider(
+            true, LootTableProvider(
+                packOutput,
+                setOf(),
+                listOf(
+                    SubProviderEntry(
+                        ::ModBlockLootTableSubProvider,
+                        LootContextParamSets.BLOCK
+                    )
+                ),
+                lookupProvider
+            )
+        )
     }
 }
